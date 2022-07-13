@@ -1,9 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Finlandica";
+  src: url("/font/Finlandica.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Finlandica";
+  src: url("/font/Finlandica-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Finlandica", sans-serif;
 }
 
 a {
@@ -13,4 +28,37 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+#__next {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@layer utilities {
+  .h1 {
+    @apply text-[2.5rem] mx-0 mt-0 mb-[0.5rem] leading-[1.2] font-semibold;
+  }
+  .h2 {
+    @apply text-[2rem] mx-0 mt-0 mb-[0.5rem] leading-[1.2] font-semibold;
+  }
+  .h3 {
+    @apply text-[1.75rem] mx-0 mt-0 mb-[0.5rem] leading-[1.2] font-semibold;
+  }
+  .p {
+    @apply m-0 mt-0 mb-4;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(190, 190, 190);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: rgb(230, 230, 230);
 }
