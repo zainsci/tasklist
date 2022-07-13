@@ -4,13 +4,13 @@
 
 @font-face {
   font-family: "Finlandica";
-  src: url("/font/Finlandica.ttf") format("truetype");
+  src: url("/tasklist/font/Finlandica.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Finlandica";
-  src: url("/font/Finlandica-SemiBold.ttf") format("truetype");
+  src: url("/tasklist/font/Finlandica-SemiBold.ttf") format("truetype");
   font-weight: 600;
 }
 

@@ -7,4 +7,9 @@ module.exports = withPWA({
     dest: "public",
     runtimeCaching,
   },
+  images: {
+    loader: "akamai",
+    path: "/",
+  },
+  basePath: "/tasklist",
 })

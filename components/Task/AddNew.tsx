@@ -65,6 +65,7 @@ const AddNew = () => {
         onClick={() => setShowAdd(!showAdd)}
         className="rounded-full flex justify-center items-center absolute right-4 bottom-4 w-12 h-12"
         disabled={taskList.length >= 6}
+        aria-label="add new task"
       >
         <Plus />
       </Button>

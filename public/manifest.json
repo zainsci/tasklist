@@ -5,8 +5,8 @@
   "background_color": "#fff",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "/tasklist/",
+  "start_url": "/tasklist/",
   "icons": [
     {
       "src": "icons/icon-72x72.png",

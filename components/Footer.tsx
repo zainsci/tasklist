@@ -26,20 +26,27 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/zainsci/tasklist"
+            aria-label="GitHub repo"
           >
             <Github />
           </a>
         </li>
         <li>
           <Link href="/">
-            <a className="p-2 rounded-md space-y-1 flex flex-col justify-center items-center">
+            <a
+              className="p-2 rounded-md space-y-1 flex flex-col justify-center items-center"
+              aria-label="Homepage"
+            >
               {activePage === "home" ? <HomeFill /> : <Home />}
             </a>
           </Link>
         </li>
         <li>
           <Link href="/about">
-            <a className="p-2 rounded-md space-y-1 flex flex-col justify-center items-center">
+            <a
+              className="p-2 rounded-md space-y-1 flex flex-col justify-center items-center"
+              aria-label="About page"
+            >
               {activePage === "about" ? <InfoFill /> : <Info />}
             </a>
           </Link>
