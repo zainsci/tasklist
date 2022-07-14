@@ -8,10 +8,10 @@ const Footer = () => {
 
   useEffect(() => {
     switch (window.location.pathname) {
-      case "/":
+      case "/tasklist":
         setActivePage("home")
         break
-      case "/about":
+      case "/tasklist/about":
         setActivePage("about")
         break
     }
