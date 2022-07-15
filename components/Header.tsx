@@ -3,7 +3,6 @@ import Image from "next/image"
 import { basePath } from "config"
 
 const Header = () => {
-  console.log(process.env.NODE_ENV)
   return (
     <header className="p-4 border-b-2 border-slate-700">
       <div className="flex justify-between text-blue-600">
