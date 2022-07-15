@@ -4,6 +4,7 @@ import { Provider } from "react-redux"
 
 import "../styles/globals.css"
 import store from "@store/index"
+import { basePath } from "config"
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,21 +20,25 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="Keywords" />
         <title>TaskList</title>
 
-        <link rel="manifest" href="/tasklist/manifest.json" />
-        <link rel="icon" type="image/x-icon" href="/tasklist/favicon.ico?v=2" />
+        <link rel="manifest" href={`${basePath}/manifest.json`} />
         <link
-          href="/tasklist/icons/icon-16x16.png"
+          rel="icon"
+          type="image/x-icon"
+          href={`${basePath}/favicon.ico?v=2`}
+        />
+        <link
+          href={`${basePath}/icons/icon-16x16.png`}
           rel="icon"
           type="image/png"
           sizes="16x16"
         />
         <link
-          href="/tasklist/icons/icon-32x32.png"
+          href={`${basePath}/icons/icon-32x32.png`}
           rel="icon"
           type="image/png"
           sizes="32x32"
         />
-        <link rel="apple-touch-icon" href="/tasklist/apple-icon.png"></link>
+        <link rel="apple-touch-icon" href={`${basePath}/apple-icon.png`}></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
       <Provider store={store}>
