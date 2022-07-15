@@ -3,6 +3,7 @@ import classNames from "classnames"
 
 import Header from "@components/Header"
 import Footer from "@components/Footer"
+import InstallPwa from "./InstallPwa"
 
 interface Props {
   children?: React.ReactNode
@@ -13,6 +14,7 @@ const Container = ({ children, className }: Props) => {
   return (
     <div className="w-full min-h-screen max-w-[420px] max-h-screen overflow-hidden relative flex flex-col bg-center">
       <Header />
+      <InstallPwa />
 
       <main
         className={classNames(
