@@ -1,14 +1,16 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily: {
-        body: ["Finlandica", "sans-serif"],
-      },
-    },
-  },
-  plugins: [],
+	content: [
+		"./pages/**/*.{js,ts,jsx,tsx}",
+		"./components/**/*.{js,ts,jsx,tsx}",
+	],
+	darkMode: "class",
+	theme: {
+		extend: {
+			fontFamily: {
+				body: ["Finlandica", "sans-serif"],
+			},
+		},
+	},
+	plugins: [],
 }

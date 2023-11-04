@@ -1,66 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Finlandica";
-  src: url("/tasklist/font/Finlandica.ttf") format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "Finlandica";
-  src: url("/tasklist/font/Finlandica-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-}
-
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Finlandica", sans-serif;
-  overscroll-behavior-y: contain;
+	padding: 0;
+	margin: 0;
+	font-family: "Ubuntu", sans-serif;
+	overscroll-behavior-y: contain;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
 }
 
 #__next {
-  min-width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	min-width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @layer utilities {
-  .h1 {
-    @apply text-[2.5rem] mx-0 mt-0 mb-[0.5rem] leading-[1.2] font-semibold;
-  }
-  .h2 {
-    @apply text-[2rem] mx-0 mt-0 mb-[0.5rem] leading-[1.2] font-semibold;
-  }
-  .h3 {
-    @apply text-[1.75rem] mx-0 mt-0 mb-[0.5rem] leading-[1.2] font-semibold;
-  }
-  .p {
-    @apply m-0 mt-0 mb-4;
-  }
+	.h1 {
+		@apply text-[2.5rem] mx-0 mt-0 mb-2 leading-[1.2] font-semibold;
+	}
+	.h2 {
+		@apply text-[2rem] mx-0 mt-0 mb-2 leading-[1.2] font-semibold;
+	}
+	.h3 {
+		@apply text-[1.75rem] mx-0 mt-0 mb-2 leading-[1.2] font-semibold;
+	}
+	.p {
+		@apply m-0 mt-0 mb-4;
+	}
+}
+
+.md-h1 {
+	@apply h1;
+}
+.md-h2 {
+	@apply h2;
+}
+.md-h3 {
+	@apply h3;
+}
+
+.md-ul {
+	@apply list-disc list-inside mb-4 text-sm;
+}
+.md-li {
+}
+.md-blockquote {
+	@apply block px-4 py-2 text-sm border-l-2 border-neutral-800 dark:border-neutral-500 bg-neutral-200 dark:bg-neutral-800;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(190, 190, 190);
+	background-color: rgb(190, 190, 190);
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-  background-color: rgb(230, 230, 230);
+	width: 4px;
+	height: 4px;
+	background-color: rgb(230, 230, 230);
 }

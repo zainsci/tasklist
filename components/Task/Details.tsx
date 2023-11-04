@@ -9,34 +9,34 @@ import Modal from "@components/Modal"
 import Button from "@components/Button"
 
 interface Props {
-  task: Task
-  showDetail: boolean
-  setShowDetail: React.Dispatch<React.SetStateAction<boolean>>
+	task: Task
+	showDetail: boolean
+	setShowDetail: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Detail = ({ task, showDetail, setShowDetail }: Props) => {
-  const dispatch = useAppDispatch()
+	const dispatch = useAppDispatch()
 
-  return (
-    <Modal
-      title={task.title}
-      opened={showDetail}
-      onClose={() => setShowDetail(!showDetail)}
-    >
-      <p className="mb-4 whitespace-pre-line">{task.description}</p>
+	return (
+		<Modal
+			title={task.title}
+			opened={showDetail}
+			onClose={() => setShowDetail(!showDetail)}
+		>
+			<p className="mb-4 whitespace-pre-line">{task.description}</p>
 
-      <div className="flex justify-end items-center space-x-2">
-        <Button
-          variant="light"
-          color="red"
-          onClick={() => dispatch(removeTask(task.id))}
-          className="w-min px-3"
-        >
-          <Trash />
-        </Button>
-      </div>
-    </Modal>
-  )
+			<div className="flex justify-end items-center space-x-2">
+				<Button
+					variant="ghost"
+					intent="danger"
+					onClick={() => dispatch(removeTask(task.id))}
+					className="w-min px-3"
+				>
+					<Trash />
+				</Button>
+			</div>
+		</Modal>
+	)
 }
 
 export default Detail

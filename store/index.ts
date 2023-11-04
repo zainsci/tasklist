@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
 
 import TaskReducer from "@store/slice/task-list"
+import SettingsReducer from "@store/slice/settings"
 
 const store = configureStore({
-  reducer: {
-    TaskReducer,
-  },
+	reducer: {
+		TaskReducer,
+		SettingsReducer,
+	},
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
 export default store

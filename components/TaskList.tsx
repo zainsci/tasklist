@@ -1,73 +1,86 @@
-import React from "react"
+import React, { useState } from "react"
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 
 import store from "@store/index"
-import { updateList } from "@store/slice/task-list"
+import { addTask, updateList } from "@store/slice/task-list"
 import { useAppDispatch, useAppSelector } from "@store/hooks"
-import { Task } from "@utils/types"
+import { Task, VIEW } from "@utils/types"
 import Item from "@components/Task/Item"
+import Button from "./Button"
+import { changeView } from "@store/slice/settings"
 
 const TaskList = () => {
-  const taskList = useAppSelector((state) => state.TaskReducer.taskList)
-  const dispatch = useAppDispatch()
+	const [showAdd, setShowAdd] = useState(false)
+	const taskList = useAppSelector((state) => state.TaskReducer.taskList)
+	const dispatch = useAppDispatch()
 
-  store.subscribe(() => {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(
-        "task-list",
-        JSON.stringify(store.getState().TaskReducer.taskList)
-      )
-    }
-  })
+	store.subscribe(() => {
+		if (typeof window !== "undefined") {
+			window.localStorage.setItem(
+				"task-list",
+				JSON.stringify(store.getState().TaskReducer.taskList)
+			)
+		}
+	})
 
-  const reorder = (list: Task[], startIndex: number, endIndex: number) => {
-    const result = Array.from(list)
-    const [removed] = result.splice(startIndex, 1)
-    result.splice(endIndex, 0, removed)
+	const reorder = (list: Task[], startIndex: number, endIndex: number) => {
+		const result = Array.from(list)
+		const [removed] = result.splice(startIndex, 1)
+		result.splice(endIndex, 0, removed)
 
-    return result
-  }
+		return result
+	}
 
-  function onDragEnd(result: DropResult) {
-    // dropped outside the list
-    if (!result.destination) {
-      return
-    }
+	function onDragEnd(result: DropResult) {
+		// dropped outside the list
+		if (!result.destination) {
+			return
+		}
 
-    const items = reorder(
-      taskList,
-      result.source.index,
-      result.destination.index
-    )
+		const items = reorder(
+			taskList,
+			result.source.index,
+			result.destination.index
+		)
 
-    dispatch(updateList(items))
-  }
+		dispatch(updateList(items))
+	}
 
-  return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable">
-        {(provided, snapshot) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            className="flex flex-col items-center rounded-md p-4 bg-gray-100"
-          >
-            {taskList.length === 0 ? (
-              <span className="block w-full bg-white py-2 text-center rounded-lg border border-dashed border-blue-700">
-                Nothing To Do! 🤪
-              </span>
-            ) : (
-              taskList.map((task, index) => {
-                return <Item key={task.id} task={task} index={index} />
-              })
-            )}
+	return (
+		<DragDropContext onDragEnd={onDragEnd}>
+			<Droppable droppableId="droppable">
+				{(provided, snapshot) => (
+					<div
+						{...provided.droppableProps}
+						ref={provided.innerRef}
+						className="flex-1 flex flex-col h-full items-center rounded-md"
+					>
+						{taskList.length === 0 ? (
+							<span className="block w-full py-2 text-center rounded-md border-2 border-dashed border-slate-500 select-none">
+								Nothing To Do! 🤪
+							</span>
+						) : (
+							taskList.map((task, index) => {
+								return <Item key={task.id} task={task} index={index} />
+							})
+						)}
 
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
-  )
+						{provided.placeholder}
+						<Button
+							className="mt-auto"
+							onClick={() => {
+								console.log("taskList.length", taskList.length)
+								dispatch(changeView(VIEW.EDITOR))
+							}}
+							disabled={taskList.length >= 6}
+						>
+							Add a new Task!
+						</Button>
+					</div>
+				)}
+			</Droppable>
+		</DragDropContext>
+	)
 }
 
 export default TaskList
