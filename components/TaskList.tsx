@@ -2,12 +2,13 @@ import React, { useState } from "react"
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd"
 
 import store from "@store/index"
-import { addTask, updateList } from "@store/slice/task-list"
+import { changeView } from "@store/slice/settings"
+import { updateList } from "@store/slice/task-list"
 import { useAppDispatch, useAppSelector } from "@store/hooks"
 import { Task, VIEW } from "@utils/types"
-import Item from "@components/Task/Item"
-import Button from "./Button"
-import { changeView } from "@store/slice/settings"
+
+import Button from "@components/Button"
+import Item from "@components/TaskItem"
 
 const TaskList = () => {
 	const [showAdd, setShowAdd] = useState(false)

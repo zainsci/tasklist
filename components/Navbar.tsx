@@ -36,7 +36,7 @@ export default function Navbar() {
 	}
 
 	return (
-		<ul className="h-[60px] flex justify-around sm:justify-start sm:flex-col w-full sm:w-auto bg-white p-2 gap-2 border-t-2 sm:border-r-2 sm:border-t-0 border-slate-200 dark:border-neutral-700">
+		<ul className="h-[60px] flex justify-around sm:justify-start sm:flex-col w-full sm:w-auto bg-white dark:bg-neutral-900 p-2 gap-2 border-t-2 sm:border-r-2 sm:border-t-0 border-slate-200 dark:border-neutral-700">
 			<li>
 				<Link href="/">
 					<a
