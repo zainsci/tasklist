@@ -61,7 +61,7 @@ const InstallPwa = () => {
 					className="w-full absolute bottom-32 p-5 z-50 flex justify-center items-center"
 					id="pwa-install"
 				>
-					<div className="w-fit bg-white flex flex-col p-4 rounded-md drop-shadow-xl ring-1 ring-slate-200 gap-2">
+					<div className="w-fit bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-600 flex flex-col p-4 rounded-md shadow-xl dark:shadow-neutral-700 gap-2">
 						<div>Install this app on your device? 🤔</div>
 						<div className="w-full flex gap-2">
 							<Button aria-label="Install as PWA?" onClick={handleClick}>

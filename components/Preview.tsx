@@ -22,7 +22,7 @@ export default function PreviewView() {
 			<div className="flex flex-col h-full p-4">
 				<div className="flex-1">
 					<h1 className="h2">{task.title}</h1>
-					<div className="flex gap-1 text-xs text-neutral-500 mb-4">
+					<div className="flex gap-1 text-xs text-neutral-500 dark:text-neutral-400 mb-4">
 						<span>
 							{new Date(task.date).toLocaleString("en-GB", {
 								day: "2-digit",
@@ -56,6 +56,7 @@ export default function PreviewView() {
 
 					<Button
 						intent="primary"
+						variant="ghost"
 						className="w-20"
 						onClick={() => dispatch(changeView(VIEW.NONE))}
 					>

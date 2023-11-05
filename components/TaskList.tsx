@@ -57,7 +57,7 @@ const TaskList = () => {
 						className="flex-1 flex flex-col h-full items-center rounded-md"
 					>
 						{taskList.length === 0 ? (
-							<span className="block w-full py-2 text-center rounded-md border-2 border-dashed border-slate-500 select-none">
+							<span className="block w-full py-2 text-center rounded-md border-2 border-dashed border-neutral-400 dark:border-neutral-600 select-none">
 								Nothing To Do! 🤪
 							</span>
 						) : (
