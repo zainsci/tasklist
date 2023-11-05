@@ -4,9 +4,9 @@ import { Provider } from "react-redux"
 import { ThemeProvider } from "next-themes"
 
 import "../styles/globals.css"
-import store from "@store/index"
+
 import { basePath } from "config"
-import { useEffect } from "react"
+import store from "@store/index"
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (

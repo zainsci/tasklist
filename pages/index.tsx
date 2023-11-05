@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react"
+
+import { useAppSelector } from "@store/hooks"
+import { VIEW } from "@utils/types"
 import Container from "@components/Container"
 import EditorView from "@components/Editor"
 import PreviewView from "@components/Preview"
 import TaskList from "@components/TaskList"
-import { useAppSelector } from "@store/hooks"
-import { VIEW } from "@utils/types"
-import { useEffect, useState } from "react"
 
 export default function Home() {
 	const currentView = useAppSelector((state) => state.SettingsReducer.mainView)
@@ -26,8 +27,8 @@ export default function Home() {
 
 	return (
 		<Container>
-			<div className="flex-1 flex w-full min-h-full">
-				<div className="sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] flex-1 flex flex-col w-full border-r-2 border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-800 p-4 overflow-y-auto">
+			<div className="flex-1 flex w-full">
+				<div className="sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] flex-1 flex flex-col w-full border-r-2 border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-800 p-4">
 					<h1 className="h2">Tasks</h1>
 					<TaskList />
 				</div>
