@@ -44,7 +44,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="theme-color" content="#317EFB" />
 			</Head>
 
-			<ThemeProvider attribute="class">
+			<ThemeProvider attribute="class" defaultTheme="dark" storageKey="theme">
 				<Provider store={store}>
 					<Component {...pageProps} />
 				</Provider>

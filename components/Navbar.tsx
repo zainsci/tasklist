@@ -15,6 +15,7 @@ import {
 export default function Navbar() {
 	const [activePage, setActivePage] = useState("home")
 	const { theme, setTheme } = useTheme()
+	console.log(theme)
 
 	useEffect(() => {
 		switch (window.location.pathname) {
