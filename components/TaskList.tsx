@@ -70,7 +70,6 @@ const TaskList = () => {
 						<Button
 							className="mt-auto"
 							onClick={() => {
-								console.log("taskList.length", taskList.length)
 								dispatch(changeView(VIEW.EDITOR))
 							}}
 							disabled={taskList.length >= 6}

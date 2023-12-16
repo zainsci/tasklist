@@ -6,6 +6,7 @@ import { useAppDispatch } from "@store/hooks"
 import { showTask, toggleTaskStatus } from "@store/slice/task-list"
 import Checkbox from "@components/Checkbox"
 import { changeView } from "@store/slice/settings"
+import { DragIndicator } from "./icons"
 
 interface Props {
 	task: Task
@@ -34,9 +35,12 @@ const Item = ({ task, index }: Props) => {
 						ref={provided.innerRef}
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
-						className={`w-full flex my-1 justify-center items-center rounded-md px-4 py-2 text-[0.8125rem] leading-5 bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700`}
+						className={`w-full flex my-1 justify-center items-center rounded-md py-2 text-[0.8125rem] leading-5 bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-700`}
 						onClick={() => previewTask(task.id)}
 					>
+						<span className="px-1">
+							<DragIndicator height={16} />
+						</span>
 						<span
 							className={`r-2 flex items-center font-semibold ${
 								task.completed && "line-through"
@@ -44,7 +48,7 @@ const Item = ({ task, index }: Props) => {
 						>
 							{task.title}
 						</span>
-						<span onClick={handleCheck} className="ml-auto cursor-pointer">
+						<span onClick={handleCheck} className="ml-auto mr-2 cursor-pointer">
 							<Checkbox checked={task.completed} />
 						</span>
 					</div>
