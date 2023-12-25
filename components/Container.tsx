@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import classNames from "classnames"
+import Head from "next/head"
 
 import Header from "@components/Header"
 import InstallPwa from "./InstallPwa"
@@ -8,13 +9,17 @@ import Navbar from "./Navbar"
 interface Props {
 	children?: React.ReactNode
 	className?: string
+	title: string
 }
 
-const Container = ({ children, className }: Props) => {
+const Container = ({ children, className, title = "Home" }: Props) => {
 	return (
 		<div className="w-screen h-screen min-h-screen overflow-hidden flex flex-col bg-center bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
 			<Header />
 			<InstallPwa />
+			<Head>
+				<title>TaskList - {title}</title>
+			</Head>
 
 			<main
 				className={classNames(

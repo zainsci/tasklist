@@ -9,7 +9,7 @@ export default function ArchivePage() {
 	console.log("archivedTasks", archivedTasks)
 
 	return (
-		<Container>
+		<Container title="Archive">
 			<div className="flex-1">
 				<ul className="p-6 grid grid-cols-3 gap-4">
 					{[...archivedTasks].map(([key, task]) => (

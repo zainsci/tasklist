@@ -59,7 +59,7 @@ export default function Home() {
 	}, [])
 
 	return (
-		<Container>
+		<Container title="Home">
 			<div className="flex-1 flex w-full">
 				<div className="sm:max-w-[250px] md:max-w-[300px] lg:max-w-[350px] flex-1 flex flex-col w-full border-r-2 border-slate-200 dark:border-neutral-700 bg-slate-100 dark:bg-neutral-800 p-4">
 					<h1 className="h2">Tasks</h1>

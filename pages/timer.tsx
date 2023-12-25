@@ -61,7 +61,7 @@ export default function TimerPage() {
 	}
 
 	return (
-		<Container>
+		<Container title="Timer">
 			<div className="flex-1 flex w-full">
 				<div className="w-full p-4">
 					<div className="w-full flex justify-between items-center">

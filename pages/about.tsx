@@ -4,7 +4,7 @@ import Container from "@components/Container"
 
 const About = () => {
 	return (
-		<Container className="p-[0px]">
+		<Container title="About" className="p-[0px]">
 			<div className="flex-1 overflow-y-scroll p-4">
 				<h1 className="h1">About</h1>
 				<p className="p">
