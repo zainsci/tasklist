@@ -21,6 +21,10 @@ const TaskList = () => {
 				"task-list",
 				JSON.stringify(store.getState().TaskReducer.taskList)
 			)
+			window.localStorage.setItem(
+				"archived-tasks",
+				JSON.stringify(Array.from(store.getState().TaskReducer.archivedTasks))
+			)
 		}
 	})
 

@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { VIEW } from "@utils/types"
 
-const initialState = {
+interface SettingsState {
+	mainView: VIEW
+	today: Date
+	tasksArchived: boolean
+}
+
+const initialState: SettingsState = {
 	mainView: VIEW.NONE,
+	today: new Date(),
+	tasksArchived: false,
 }
 
 export const settingSlice = createSlice({

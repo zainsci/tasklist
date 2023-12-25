@@ -1,3 +1,5 @@
+export { default as ArchiveFill } from "./ArchiveFill";
+export { default as Archive } from "./Archive";
 export { default as CheckboxFill } from "./CheckboxFill";
 export { default as DragIndicator } from "./DragIndicator";
 export { default as Github } from "./Github";

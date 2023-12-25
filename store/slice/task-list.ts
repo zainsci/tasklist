@@ -2,12 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { Task } from "@utils/types"
 
-interface TaskList {
+interface TaskListState {
 	taskList: Task[]
+	archivedTasks: Map<string, Task>
 	currentTask: Task | null
 }
 
-function getLocalStorageState() {
+function getTasksFromLS() {
 	if (typeof window !== "undefined") {
 		return JSON.parse(window.localStorage.getItem("task-list") || "[]")
 	}
@@ -15,8 +16,22 @@ function getLocalStorageState() {
 	return []
 }
 
-const initialState: TaskList = {
-	taskList: getLocalStorageState(),
+function getArchivedTasksFromLS() {
+	let archivedTasks = new Map()
+	if (typeof window !== "undefined") {
+		archivedTasks = new Map(
+			JSON.parse(window.localStorage.getItem("archived-tasks") || "[]")
+		)
+
+		console.log("from getArchivedTasksFromLS()", archivedTasks)
+	}
+
+	return archivedTasks
+}
+
+const initialState: TaskListState = {
+	taskList: getTasksFromLS(),
+	archivedTasks: getArchivedTasksFromLS(),
 	currentTask: null,
 }
 
@@ -53,10 +68,33 @@ export const counterSlice = createSlice({
 			)
 			if (filterTask.length > 0) state.currentTask = filterTask[0]
 		},
+
+		updateArchivedTasks: (
+			state,
+			action: PayloadAction<{
+				tasks: Task[]
+				archive: Set<Task>
+			}>
+		) => {
+			const newArchive = state.archivedTasks
+
+			state.taskList = action.payload.tasks
+			action.payload.archive.forEach((task) => {
+				if (!newArchive.has(task.id)) newArchive.set(task.id, task)
+			})
+
+			state.archivedTasks = newArchive
+		},
 	},
 })
 
-export const { addTask, removeTask, toggleTaskStatus, updateList, showTask } =
-	counterSlice.actions
+export const {
+	addTask,
+	removeTask,
+	toggleTaskStatus,
+	updateList,
+	showTask,
+	updateArchivedTasks,
+} = counterSlice.actions
 
 export default counterSlice.reducer

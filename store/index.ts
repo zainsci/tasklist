@@ -1,14 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { enableMapSet } from "immer"
 
 import TaskReducer from "@store/slice/task-list"
 import SettingsReducer from "@store/slice/settings"
+
+enableMapSet()
 
 const store = configureStore({
 	reducer: {
 		TaskReducer,
 		SettingsReducer,
 	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}),
 })
 
 export default store

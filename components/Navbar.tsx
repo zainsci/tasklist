@@ -12,6 +12,8 @@ import {
 	Moon,
 	Timer,
 	TimerFill,
+	Archive,
+	ArchiveFill,
 } from "@components/icons"
 
 const navLinks = [
@@ -26,6 +28,12 @@ const navLinks = [
 		href: "/timer",
 		emptyIcon: <Timer />,
 		fillIcon: <TimerFill />,
+	},
+	{
+		name: "archive",
+		href: "/archive",
+		emptyIcon: <Archive />,
+		fillIcon: <ArchiveFill />,
 	},
 	{
 		name: "about",

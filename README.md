@@ -9,3 +9,6 @@ A simple PWA Todo app built NextJs, TailwindCss, and Framer Motion. Based on Ivy
 - [ ] Multiple Color Themes
 - [ ] Notes Section
 - [ ] Pomodoro / Timer
+- [ ] Convert to PDF Document
+- [ ] Archive Yesterday's Completed Tasks
+- [ ] Recycle Bin

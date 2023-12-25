@@ -1,15 +1,48 @@
 import { useEffect, useState } from "react"
 
-import { useAppSelector } from "@store/hooks"
-import { VIEW } from "@utils/types"
+import { useAppDispatch, useAppSelector } from "@store/hooks"
+import { updateArchivedTasks } from "@store/slice/task-list"
+import { Task, VIEW } from "@utils/types"
 import Container from "@components/Container"
 import EditorView from "@components/Editor"
 import PreviewView from "@components/Preview"
 import TaskList from "@components/TaskList"
 
 export default function Home() {
-	const currentView = useAppSelector((state) => state.SettingsReducer.mainView)
 	const [isMobile, setMobile] = useState(false)
+	const {
+		TaskReducer: { taskList, archivedTasks },
+		SettingsReducer: { tasksArchived, mainView },
+	} = useAppSelector((state) => state)
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		if (!tasksArchived) {
+			const yesterdaysCompletedTasks: Set<Task> = new Set()
+			const leftOutTasks: Task[] = []
+
+			taskList.forEach((task) => {
+				if (
+					new Date(task.date).getDate() <= new Date().getDate() - 1 &&
+					task.completed
+				)
+					yesterdaysCompletedTasks.add(task)
+				else leftOutTasks.push(task)
+
+				// console.log(task.title)
+				// leftOutTasks = taskList.filter(task => )
+			})
+			dispatch(
+				updateArchivedTasks({
+					tasks: leftOutTasks,
+					archive: yesterdaysCompletedTasks,
+				})
+			)
+
+			console.log("yesterdaysCompletedTasks", yesterdaysCompletedTasks)
+			console.log("leftOutTasks", leftOutTasks)
+		}
+	}, [])
 
 	useEffect(() => {
 		window.addEventListener(
@@ -37,15 +70,14 @@ export default function Home() {
 						isMobile &&
 						"absolute -right-full z-50 w-full h-[calc(100%-120px)] bg-white"
 					} ${
-						isMobile &&
-						(currentView === VIEW.EDITOR || currentView === VIEW.PREVIEW)
+						isMobile && (mainView === VIEW.EDITOR || mainView === VIEW.PREVIEW)
 							? "-translate-x-full "
 							: ""
-					} ${isMobile && currentView === VIEW.NONE ? "translate-x-full" : ""}`}
+					} ${isMobile && mainView === VIEW.NONE ? "translate-x-full" : ""}`}
 				>
-					{currentView === VIEW.EDITOR && <EditorView />}
-					{currentView === VIEW.PREVIEW && <PreviewView />}
-					{currentView === VIEW.NONE && (
+					{mainView === VIEW.EDITOR && <EditorView />}
+					{mainView === VIEW.PREVIEW && <PreviewView />}
+					{mainView === VIEW.NONE && (
 						<div className="w-full h-full flex justify-center items-center select-none">
 							<div className="h1 text-neutral-500">TaskList</div>
 						</div>

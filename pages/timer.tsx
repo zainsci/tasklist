@@ -95,6 +95,7 @@ export default function TimerPage() {
 											: "font-medium text-neutral-500 dark:text-neutral-400"
 									}`}
 									onClick={() => setTimer(time)}
+									key={time}
 								>
 									{time} Min
 								</li>
