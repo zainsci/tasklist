@@ -7,6 +7,8 @@ export { default as HomeFill } from "./HomeFill";
 export { default as Home } from "./Home";
 export { default as InfoFill } from "./InfoFill";
 export { default as Info } from "./Info";
+export { default as InstallDesktop } from "./InstallDesktop";
+export { default as InstallMobile } from "./InstallMobile";
 export { default as Menu } from "./Menu";
 export { default as Moon } from "./Moon";
 export { default as Play } from "./Play";

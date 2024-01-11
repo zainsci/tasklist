@@ -14,7 +14,20 @@ import {
 	TimerFill,
 	Archive,
 	ArchiveFill,
+	InstallMobile,
+	InstallDesktop,
 } from "@components/icons"
+
+// https://stackoverflow.com/questions/51503754/typescript-type-beforeinstallpromptevent
+interface BeforeInstallPromptEvent extends Event {
+	readonly platforms: Array<string>
+
+	readonly userChoice: Promise<{
+		outcome: "accepted" | "dismissed"
+		platform: string
+	}>
+	prompt(): Promise<void>
+}
 
 const navLinks = [
 	{
@@ -45,6 +58,9 @@ const navLinks = [
 
 export default function Navbar() {
 	const [activePage, setActivePage] = useState("home")
+	const [isMobile, setMobile] = useState(false)
+	const [supportsPWA, setSupportsPWA] = useState(false)
+	const [promptInstall, setPromptInstall] = useState<BeforeInstallPromptEvent>()
 	const { theme, setTheme } = useTheme()
 
 	useEffect(() => {
@@ -59,7 +75,29 @@ export default function Navbar() {
 				setActivePage("about")
 				break
 		}
+
+		window.innerWidth < 640 ? setMobile(true) : setMobile(false)
 	}, [])
+
+	useEffect(() => {
+		const eventHandler = (e: BeforeInstallPromptEvent) => {
+			e.preventDefault()
+			setSupportsPWA(true)
+			setPromptInstall(e)
+		}
+
+		window.addEventListener("beforeinstallprompt", eventHandler)
+		window.addEventListener("appinstalled", () => setSupportsPWA(false))
+		return () => window.removeEventListener("transitionend", eventHandler)
+	}, [])
+
+	function installPWA() {
+		if (!promptInstall) {
+			return
+		}
+
+		promptInstall.prompt()
+	}
 
 	function toggleTheme() {
 		if (theme === "dark") setTheme("light")
@@ -94,7 +132,18 @@ export default function Navbar() {
 					</a>
 				</li>
 
-				<li className="mt-auto hidden sm:block">
+				{supportsPWA && (
+					<li className="mt-auto hidden sm:block">
+						<button
+							className="block p-2 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+							onClick={installPWA}
+						>
+							{isMobile ? <InstallMobile /> : <InstallDesktop />}
+						</button>
+					</li>
+				)}
+
+				<li className={`hidden sm:block ${supportsPWA ? "" : "mt-auto"}`}>
 					<button
 						className="block p-2 rounded-md bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 						onClick={toggleTheme}

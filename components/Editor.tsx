@@ -104,9 +104,8 @@ export default function EditorView() {
 				</Button>
 				<Button
 					onClick={() => dispatch(changeView(VIEW.NONE))}
-					variant="ghost"
 					className="w-20"
-					intent="primary"
+					variant="outline"
 				>
 					Close
 				</Button>

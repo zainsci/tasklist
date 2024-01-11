@@ -50,13 +50,12 @@ export default function PreviewView() {
 					/>
 				</div>
 				<div className="flex w-full justify-end gap-4">
-					<Button intent="danger" className="w-20" onClick={deleteTask}>
+					<Button variant="danger" className="w-20" onClick={deleteTask}>
 						<Trash />
 					</Button>
 
 					<Button
-						intent="primary"
-						variant="ghost"
+						variant="secondary"
 						className="w-20"
 						onClick={() => dispatch(changeView(VIEW.NONE))}
 					>

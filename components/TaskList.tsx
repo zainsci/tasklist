@@ -25,6 +25,10 @@ const TaskList = () => {
 				"archived-tasks",
 				JSON.stringify(Array.from(store.getState().TaskReducer.archivedTasks))
 			)
+			window.localStorage.setItem(
+				"settings",
+				JSON.stringify(store.getState().SettingsReducer)
+			)
 		}
 	})
 
@@ -72,7 +76,7 @@ const TaskList = () => {
 
 						{provided.placeholder}
 						<Button
-							className="mt-auto"
+							className="mt-auto w-full"
 							onClick={() => {
 								dispatch(changeView(VIEW.EDITOR))
 							}}

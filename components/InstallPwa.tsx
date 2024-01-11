@@ -58,16 +58,26 @@ const InstallPwa = () => {
 					animate="opened"
 					initial="closed"
 					exit="onexit"
-					className="w-full absolute bottom-32 p-5 z-50 flex justify-center items-center"
+					className="w-screen absolute bottom-32 p-5 z-50 flex justify-center items-center"
 					id="pwa-install"
 				>
-					<div className="w-fit bg-white dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-600 flex flex-col p-4 rounded-md shadow-xl dark:shadow-neutral-700 gap-2">
-						<div>Install this app on your device? 🤔</div>
-						<div className="w-full flex gap-2">
-							<Button aria-label="Install as PWA?" onClick={handleClick}>
+					<div className="min-w-fit bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-700 flex flex-col p-4 rounded-md shadow-md dark:shadow-neutral-800 gap-4">
+						<div className="text-center">
+							Install this app on your device? 🤔
+						</div>
+						<div className="w-full flex gap-4">
+							<Button
+								aria-label="Install as PWA?"
+								onClick={handleClick}
+								className="flex-1"
+							>
 								Install
 							</Button>
-							<Button intent="danger" onClick={() => setSupportsPWA(false)}>
+							<Button
+								variant="danger"
+								onClick={() => setSupportsPWA(false)}
+								className="flex-1"
+							>
 								Don't
 							</Button>
 						</div>
