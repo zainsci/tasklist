@@ -4,7 +4,7 @@
 	"repository": "https://github.com/zainsci/tasklist",
 	"homepage": "https://github.com/zainsci/tasklist",
 	"author": "zainsci",
-	"version": "1.1",
+	"version": "1.2",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
