@@ -1,12 +1,21 @@
 import Button from "@components/Button"
 import Container from "@components/Container"
+import Input from "@components/Input/input"
+import Modal from "@components/Modal"
 import { Play, Replay, Settings, Stop } from "@components/icons"
+import { useAppDispatch, useAppSelector } from "@store/hooks"
+import { changeTimer } from "@store/slice/settings"
 import { useEffect, useRef, useState } from "react"
 
 export default function TimerPage() {
-	const [seconds, setSeconds] = useState(5)
+	const timer = useAppSelector((state) => state.SettingsReducer.timer)
+	const dispatch = useAppDispatch()
+
+	const [seconds, setSeconds] = useState(timer)
+	const [currSeconds, setCurrSeconds] = useState(timer)
 	const [isPlaying, setIsPlaying] = useState(false)
-	const [currTimer, setCurrTimer] = useState(5)
+	const [customTime, setCustomTime] = useState(timer)
+	const [customTimeModal, setCustomTimeModal] = useState(false)
 
 	const firstStart = useRef(true)
 	const tick = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -20,7 +29,6 @@ export default function TimerPage() {
 		if (isPlaying) {
 			tick.current = setInterval(() => {
 				setSeconds((seconds) => {
-					console.log(seconds)
 					if (seconds <= 1) {
 						setIsPlaying(false)
 						clearInterval(tick.current)
@@ -38,13 +46,27 @@ export default function TimerPage() {
 
 	function setTimer(mins: number) {
 		setIsPlaying(false)
+		dispatch(changeTimer(mins * 60))
 		setSeconds(mins * 60)
-		setCurrTimer(mins * 60)
+		setCurrSeconds(mins * 60)
 	}
 
 	function restartTimer() {
 		setIsPlaying(false)
-		setSeconds(currTimer)
+		setSeconds(currSeconds)
+	}
+
+	function startTimer() {
+		setIsPlaying(true)
+	}
+
+	function stopTimer() {
+		setIsPlaying(false)
+	}
+
+	function setCutomTimer() {
+		setTimer(customTime)
+		setCustomTimeModal(false)
 	}
 
 	function secToMin(seconds: number) {
@@ -53,53 +75,83 @@ export default function TimerPage() {
 		)}:${seconds % 60 <= 9 ? "0" : ""}${seconds % 60}`
 	}
 
-	function startTimer() {
-		setIsPlaying(true)
-	}
-	function stopTimer() {
-		setIsPlaying(false)
-	}
-
 	return (
 		<Container title="Timer">
-			<div className="flex-1 flex w-full">
+			<div className="flex-1 flex w-full relative">
 				<div className="w-full p-4">
 					<div className="w-full flex justify-between items-center">
 						<h3 className="h3">Timer</h3>
-						<Button intent="primary" variant="ghost" className="w-fit px-1">
+						<Button variant="secondary" className="w-fit px-1">
 							<Settings height={16} />
 						</Button>
 					</div>
 
 					<div className="flex gap-2 bg-neutral-300 dark:bg-neutral-700 rounded-md p-1 text-xs font-bold">
 						<div className="hidden sm:flex gap-2 items-center">
-							<button
-								className="px-3 py-2 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-md select-none cursor-pointer active:translate-y-[1px]"
+							<Button
+								variant="secondary"
+								size="sm"
 								onClick={isPlaying ? stopTimer : startTimer}
 							>
 								{isPlaying ? <Stop height={16} /> : <Play height={16} />}
-							</button>
-							<button
-								className="px-3 py-2 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-md select-none cursor-pointer active:translate-y-[1px]"
-								onClick={restartTimer}
-							>
+							</Button>
+							<Button variant="secondary" size="sm" onClick={restartTimer}>
 								<Replay height={16} />
-							</button>
+							</Button>
 						</div>
 						<ul className="flex-1 flex gap-2 sm:justify-end justify-between items-center">
 							{[5, 10, 20, 30].map((time) => (
-								<li
-									className={`px-3 py-2 bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-md select-none cursor-pointer active:translate-y-[1px] ${
-										currTimer / 60 === time
+								<li key={time}>
+									<Button
+										variant="secondary"
+										size="sm"
+										className={`${
+											currSeconds / 60 === time
+												? "font-bold"
+												: "font-medium text-neutral-500 dark:text-neutral-400"
+										}`}
+										onClick={() => {
+											setTimer(time)
+											setCustomTime(0)
+										}}
+									>
+										{time} Min
+									</Button>
+								</li>
+							))}
+							<li>
+								<Button
+									variant="secondary"
+									size="sm"
+									className={`${
+										customTime > 0
 											? "font-bold"
 											: "font-medium text-neutral-500 dark:text-neutral-400"
 									}`}
-									onClick={() => setTimer(time)}
-									key={time}
+									onClick={() => setCustomTimeModal(true)}
 								>
-									{time} Min
-								</li>
-							))}
+									Custom
+								</Button>
+							</li>
+							<Modal
+								opened={customTimeModal}
+								title="Time in Minutes!"
+								onClose={() => setCustomTimeModal(false)}
+								className="w-80"
+							>
+								<div className="flex flex-col gap-4">
+									<Input
+										id="custom-time"
+										placeholder="Time in Minutes!"
+										value={customTime}
+										onChange={(e) => setCustomTime(Number(e.target.value))}
+										type="number"
+										min="0"
+										className="w-auto"
+									/>
+									<Button onClick={setCutomTimer}>Submit</Button>
+								</div>
+							</Modal>
 						</ul>
 					</div>
 					<div className="mt-6">
