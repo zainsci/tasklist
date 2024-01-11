@@ -28,9 +28,6 @@ export default function Home() {
 				)
 					yesterdaysCompletedTasks.add(task)
 				else leftOutTasks.push(task)
-
-				// console.log(task.title)
-				// leftOutTasks = taskList.filter(task => )
 			})
 			dispatch(
 				updateArchivedTasks({
@@ -56,6 +53,8 @@ export default function Home() {
 			},
 			true
 		)
+
+		window.innerWidth < 640 ? setMobile(true) : setMobile(false)
 	}, [])
 
 	return (
