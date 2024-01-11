@@ -1,97 +1,70 @@
-import React from "react"
+import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { clsx } from "clsx"
 
-const button = cva(
+const buttonVariants = cva(
 	[
-		"h-8",
-		"rounded-md",
-		"text-center",
-		"font-bold",
-		"text-sm",
-		"active:translate-y-[1px]",
-		"w-full",
-		"shadow-sm",
-		"border-2",
-		"flex",
-		"justify-center",
+		"inline-flex",
 		"items-center",
-		"hover:opacity-90",
-		"disabled:opacity-40",
+		"justify-center",
+		"rounded-md",
+		"text-sm",
+		"font-medium",
+		"transition-colors",
+		"focus-visible:outline-none",
+		"focus-visible:ring-2",
+		"focus-visible:ring-ring",
+		"focus-visible:ring-offset-2",
+		"disabled:opacity-50",
+		"disabled:pointer-events-none",
+		"ring-offset-background",
+		"active:translate-y-[1px]",
 	],
 	{
 		variants: {
-			intent: {
-				primary: [
-					"text-white",
-					"bg-neutral-900",
-					"border-neutral-900",
-					"dark:bg-neutral-200",
-					"dark:border-neutral-200",
-					"dark:text-neutral-900",
-				],
-				secondary: ["text-white", "bg-green-500", "border-green-500"],
-				danger: ["text-white", "bg-red-500", "border-red-500"],
+			variant: {
+				primary:
+					"bg-neutral-800 dark:bg-neutral-200 text-white dark:text-black hover:bg-neutral-800/90 dark:hover:bg-neutral-200/90",
+				secondary:
+					"bg-slate-200 dark:bg-neutral-800 hover:bg-slate-200/90 dark:hover:bg-neutral-800/90",
+				danger:
+					"bg-red-500 dark:bg-red-800 text-white hover:bg-red-500/80 dark:hover:bg-red-800/80",
+				outline:
+					"border border-neutral-300 dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 hover:text-accent-foreground",
+				link: "underline-offset-4 hover:underline text-primary",
 			},
 			size: {
-				small: ["text-sm"],
-				medium: ["text-sm"],
-			},
-			variant: {
-				outline: ["bg-opacity-0"],
-				filled: ["text-white"],
-				ghost: [
-					"bg-opacity-20",
-					"border-opacity-20",
-					"dark:bg-opacity-20",
-					"dark:border-opacity-20",
-				],
+				xs: "h-6 px-2  rounded-md text-xs font-bold",
+				sm: "h-7 px-2 rounded-md text-xs",
+				md: "h-8 py-2 px-4",
+				lg: "h-10 px-7 rounded-md",
 			},
 		},
-		compoundVariants: [
-			{
-				intent: ["primary", "secondary", "danger"],
-				variant: "filled",
-			},
-			{
-				intent: ["primary", "secondary", "danger"],
-				variant: "outline",
-			},
-			{
-				intent: "primary",
-				variant: "ghost",
-				className: ["text-neutral-800", "dark:text-neutral-300"],
-			},
-			{
-				intent: "secondary",
-				variant: "ghost",
-				className: ["text-green-700", "dark:text-green-400"],
-			},
-			{
-				intent: "danger",
-				variant: "ghost",
-				className: ["text-red-700", "dark:text-red-400"],
-			},
-		],
 		defaultVariants: {
-			intent: "primary",
-			size: "medium",
-			variant: "filled",
+			variant: "primary",
+			size: "md",
 		},
 	}
 )
 
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-		VariantProps<typeof button> {}
+		VariantProps<typeof buttonVariants> {
+	asChild?: boolean
+}
 
-const Button: React.FC<ButtonProps> = ({
-	className,
-	intent,
-	variant,
-	size,
-	...props
-}) => (
-	<button className={button({ intent, size, variant, className })} {...props} />
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+	({ className, variant, size, asChild = false, ...props }, ref) => {
+		return (
+			<button
+				className={clsx(buttonVariants({ variant, size, className }))}
+				ref={ref}
+				{...props}
+			/>
+		)
+	}
 )
+Button.displayName = "Button"
 
 export default Button
+export { buttonVariants }
