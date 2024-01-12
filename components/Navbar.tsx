@@ -65,13 +65,16 @@ export default function Navbar() {
 
 	useEffect(() => {
 		switch (window.location.pathname) {
-			case "/":
+			case "/tasklist/":
 				setActivePage("home")
 				break
-			case "/timer":
+			case "/tasklist/timer":
 				setActivePage("timer")
 				break
-			case "/about":
+			case "/tasklist/archive":
+				setActivePage("archive")
+				break
+			case "/tasklist/about":
 				setActivePage("about")
 				break
 		}
