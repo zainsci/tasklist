@@ -6,7 +6,6 @@ export default function ArchivePage() {
 	const archivedTasks = useAppSelector(
 		(state) => state.TaskReducer.archivedTasks
 	)
-	console.log("archivedTasks", archivedTasks)
 
 	return (
 		<Container title="Archive">

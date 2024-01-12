@@ -17,6 +17,8 @@ import {
 	InstallMobile,
 	InstallDesktop,
 } from "@components/icons"
+import { useAppDispatch, useAppSelector } from "@store/hooks"
+import { setSupportsPWA } from "@store/slice/settings"
 
 // https://stackoverflow.com/questions/51503754/typescript-type-beforeinstallpromptevent
 interface BeforeInstallPromptEvent extends Event {
@@ -57,9 +59,13 @@ const navLinks = [
 ]
 
 export default function Navbar() {
+	const supportsPWA = useAppSelector(
+		(state) => state.SettingsReducer.supportsPWA
+	)
+	const dispatch = useAppDispatch()
+
 	const [activePage, setActivePage] = useState("home")
 	const [isMobile, setMobile] = useState(false)
-	const [supportsPWA, setSupportsPWA] = useState(false)
 	const [promptInstall, setPromptInstall] = useState<BeforeInstallPromptEvent>()
 	const { theme, setTheme } = useTheme()
 
@@ -85,12 +91,19 @@ export default function Navbar() {
 	useEffect(() => {
 		const eventHandler = (e: BeforeInstallPromptEvent) => {
 			e.preventDefault()
-			setSupportsPWA(true)
+			dispatch(setSupportsPWA(true))
 			setPromptInstall(e)
 		}
 
-		window.addEventListener("beforeinstallprompt", eventHandler)
-		window.addEventListener("appinstalled", () => setSupportsPWA(false))
+		console.log("supportsPWA", supportsPWA)
+
+		window.addEventListener("beforeinstallprompt", (e) => {
+			console.log("beforeinstallprompt")
+			eventHandler(e)
+		})
+		window.addEventListener("appinstalled", () =>
+			dispatch(setSupportsPWA(true))
+		)
 		return () => window.removeEventListener("transitionend", eventHandler)
 	}, [])
 

@@ -35,9 +35,6 @@ export default function Home() {
 					archive: yesterdaysCompletedTasks,
 				})
 			)
-
-			console.log("yesterdaysCompletedTasks", yesterdaysCompletedTasks)
-			console.log("leftOutTasks", leftOutTasks)
 		}
 	}, [])
 

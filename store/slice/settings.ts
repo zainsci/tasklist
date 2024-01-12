@@ -6,6 +6,7 @@ interface SettingsState {
 	today: Date
 	tasksArchived: boolean
 	timer: number
+	supportsPWA: boolean
 }
 
 function loadSettingFromLS() {
@@ -26,6 +27,7 @@ const initialState: SettingsState = loadSettingFromLS() ?? {
 	today: new Date(),
 	tasksArchived: false,
 	timer: 5 * 60,
+	supportsPWA: false,
 }
 
 export const settingSlice = createSlice({
@@ -38,9 +40,12 @@ export const settingSlice = createSlice({
 		changeTimer(state, action: PayloadAction<number>) {
 			state.timer = action.payload
 		},
+		setSupportsPWA(state, action: PayloadAction<boolean>) {
+			state.supportsPWA = action.payload
+		},
 	},
 })
 
-export const { changeView, changeTimer } = settingSlice.actions
+export const { changeView, changeTimer, setSupportsPWA } = settingSlice.actions
 
 export default settingSlice.reducer

@@ -22,8 +22,6 @@ function getArchivedTasksFromLS() {
 		archivedTasks = new Map(
 			JSON.parse(window.localStorage.getItem("archived-tasks") || "[]")
 		)
-
-		console.log("from getArchivedTasksFromLS()", archivedTasks)
 	}
 
 	return archivedTasks
