@@ -18,6 +18,11 @@ export default function ArchivePage() {
 							<p className="text-sm">{task.title.slice(0, 25)}</p>
 						</li>
 					))}
+					{[...archivedTasks].length <= 0 && (
+						<li className="flex w-full h-full justify-center items-center select-none text-5xl col-span-3 text-neutral-500">
+							Nothing Here!!
+						</li>
+					)}
 				</ul>
 			</div>
 		</Container>
