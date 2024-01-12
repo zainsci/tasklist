@@ -1,11 +1,12 @@
-import Button from "@components/Button"
-import Container from "@components/Container"
-import Input from "@components/Input/input"
-import Modal from "@components/Modal"
-import { Play, Replay, Settings, Stop } from "@components/icons"
+import { useEffect, useRef, useState } from "react"
+
 import { useAppDispatch, useAppSelector } from "@store/hooks"
 import { changeTimer } from "@store/slice/settings"
-import { useEffect, useRef, useState } from "react"
+import Container from "@components/Container"
+import Button from "@components/Button"
+import Modal from "@components/Modal"
+import Input from "@components/Input/input"
+import { Play, Replay, Settings, Stop } from "@components/icons"
 
 export default function TimerPage() {
 	const timer = useAppSelector((state) => state.SettingsReducer.timer)
@@ -31,17 +32,17 @@ export default function TimerPage() {
 				setSeconds((seconds) => {
 					if (seconds <= 1) {
 						setIsPlaying(false)
-						clearInterval(tick.current)
+						clearInterval(tick.current as unknown as number)
 					}
 
 					return seconds - 1
 				})
 			}, 1000)
 		} else {
-			clearInterval(tick.current)
+			clearInterval(tick.current as unknown as number)
 		}
 
-		return () => clearInterval(tick.current)
+		return () => clearInterval(tick.current as unknown as number)
 	}, [isPlaying])
 
 	function setTimer(mins: number) {
